@@ -115,9 +115,15 @@ async def handle_step_4(message: Message, state: FSMContext):
 async def restart_form(message: Message, state: FSMContext):
     await start_form(message, state)
 
+
 # 🚀 Запуск бота
 async def main():
+    # Удаляем старый webhook, чтобы можно было использовать polling
+    await bot.delete_webhook(drop_pending_updates=True)
+
+    print("✅ Бот запущен. Ожидаем сообщения...")
     await dp.start_polling(bot)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
